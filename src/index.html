@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vignan's Charging Station</title>
+    <link rel="stylesheet" href="../public/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="parallax-bg"></div>
+    <header class="glass-header">
+        <div class="header-content">
+            <div class="header-text">
+                <h1 class="main-title">Vignan's Charging Station</h1>
+                <h2 class="subtitle">Eco-Friendly. Futuristic. Instant Power.</h2>
+            </div>
+            <div class="header-image-guidance">
+                <img src="https://www.vidyavision.com/CollegeUploads/Logos/2016-09-6-06-44-05_vignanlogo.png" alt="Hero Visual" class="hero-img small-logo" />
+                <div class="guidance-text">
+                    <p>Under the Esteemed Guidance of<br>
+                    <strong>Dr. CH V V Ramana</strong><br>
+                    Associate Professor<br>
+                    Department of Computer Science Engineering</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="glass-card about-section">
+            <h2 class="section-title">About Solar Power</h2>
+            <p>Solar power harnesses energy from the sun using photovoltaic panels, converting sunlight into clean, renewable electricity. This energy is stored in advanced batteries and used to charge your devices efficiently and sustainably. By using solar-powered charging stations, you help reduce carbon emissions and promote a greener future!</p>
+        </section>
+        <section class="glass-card payment-section">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <div class="payment-options">
+                <div class="payment-card glass-card" data-minutes="60" data-price="10">
+                    <h3>1 Hour</h3>
+                    <div class="price">₹10</div>
+                    <button class="glass-btn scan-pay">Scan to Pay</button>
+                </div>
+                <div class="payment-card glass-card" data-minutes="120" data-price="20">
+                    <h3>2 Hours</h3>
+                    <div class="price">₹20</div>
+                    <button class="glass-btn scan-pay">Scan to Pay</button>
+                </div>
+            </div>
+            <div class="custom-time">
+                <label for="timeSlider">Or select your own time:</label>
+                <div class="slider-row">
+                    <input type="range" min="30" max="240" step="5" value="30" id="timeSlider">
+                    <span id="sliderValue">30</span> min
+                </div>
+                <div class="custom-price">Price: ₹<span id="customPrice">5</span></div>
+                <button class="glass-btn scan-pay custom-scan">Proceed</button>
+            </div>
+        </section>
+    </main>
+    <div class="modal" id="qrModal">
+        <div class="modal-content glass-card">
+            <span class="close">&times;</span>
+            <h2>Enter Your Details</h2>
+            <form id="userDetailsForm">
+                <input type="text" id="userName" placeholder="Your Name" required><br>
+                <input type="tel" id="userMobile" placeholder="Mobile Number" pattern="[0-9]{10}" required><br>
+                <button type="submit" class="glass-btn">Continue</button>
+            </form>
+            <div id="qrSection" style="display:none;">
+                <h2>Scan to Pay</h2>
+                <img src="my QR.jpeg" alt="Payment QR Code" class="qr-code">
+                <button class="glass-btn" id="paidBtn">✅ I Have Paid</button>
+                <button class="glass-btn" id="startTimerBtn" disabled>Start Timer</button>
+                <div id="paymentSuccess" style="display:none; color: #4caf50; font-weight: bold; margin-top: 1rem;">
+                    <span style="font-size:1.5rem;">✔</span> Payment Successful
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="timer-screen" id="timerScreen">
+        <div class="timer-container glass-card">
+            <span class="close-timer" id="minimizeTimer">✖</span>
+            <h2>🔋 You Can Now Charge Your Device</h2>
+            <div class="countdown-timer">
+                <div class="timer-circle">
+                    <span id="timer">00:00</span>
+                </div>
+            </div>
+            <div class="charging-animation"></div>
+        </div>
+    </div>
+    <script src="../public/scripts/script.js"></script>
+    <script>
+    function notifyChargingStarted(mobile) {
+        if ('Notification' in window) {
+            if (Notification.permission === 'granted') {
+                new Notification('Charging Started', {
+                    body: `Charging started for ${mobile}`,
+                    icon: 'https://leavesinternational.com/wp-content/uploads/2023/02/Vignan_logo.png'
+                });
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification('Charging Started', {
+                            body: `Charging started for ${mobile}`,
+                            icon: 'https://leavesinternational.com/wp-content/uploads/2023/02/Vignan_logo.png'
+                        });
+                    }
+                });
+            }
+        }
+    }
+    </script>
+</body>
+</html> 
